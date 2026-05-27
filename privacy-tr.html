@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gizlilik Politikası — Focused App</title>
+  <meta name="description" content="Focused uygulaması için Gizlilik Politikası." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f14;
+      --surface: #1a1a24;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7c6fcd;
+      --text: #f0f0f5;
+      --muted: rgba(240,240,245,0.55);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(15,15,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 20px; font-weight: 800; text-decoration: none; color: var(--text); }
+    .nav-logo span { color: var(--accent); }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+    nav a.back:hover { color: var(--text); }
+
+    .hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(124,111,205,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800; letter-spacing: -2px; margin-bottom: 16px;
+    }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 480px; margin: 0 auto; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 20px 24px 100px; color: var(--muted); }
+    .content h2 { color: var(--text); font-size: 24px; font-weight: 700; margin: 32px 0 16px; }
+    .content p { margin-bottom: 16px; }
+    .content ul { margin-bottom: 16px; padding-left: 24px; }
+    .content li { margin-bottom: 8px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p { color: var(--muted); font-size: 14px; }
+    footer a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; gap: 24px; }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Focused<span>.</span></a>
+  <a href="index.html" class="back">← Ana Sayfaya Dön</a>
+</nav>
+
+<div class="hero">
+  <h1>Gizlilik Politikası</h1>
+  <p>Son güncelleme: Mayıs 2026</p>
+</div>
+
+<div class="content">
+  <p>Focused olarak gizliliğinizi ciddiye alıyoruz. Bu Gizlilik Politikası, hangi bilgileri topladığımızı, bunları nasıl kullandığımızı ve sahip olduğunuz seçenekleri ana hatlarıyla belirtir.</p>
+
+  <h2>1. Topladığımız Bilgiler</h2>
+  <p><strong>Yerel Olarak Saklanan Veriler:</strong> Görevleriniz, alışkanlık zincirleriniz ve pomodoro geçmişiniz dahil olmak üzere verilerinizin çoğu, varsayılan olarak cihazınızda yerel olarak saklanır.</p>
+  <p><strong>Hesap Bilgileri:</strong> Çevrimiçi özellikleri (Çevrimiçi Odalar gibi) kullanmak veya verilerinizi senkronize etmek için bir hesap oluşturmayı seçerseniz, e-posta adresinizi ve temel profil bilgilerinizi (görünen adınız gibi) toplarız.</p>
+  
+  <h2>2. Bilgilerinizi Nasıl Kullanıyoruz</h2>
+  <p>Topladığımız bilgileri yalnızca Focused uygulama deneyimini sağlamak ve iyileştirmek için kullanıyoruz:</p>
+  <ul>
+    <li>Verilerinizi cihazlarınız arasında senkronize etmek için (oturum açtıysanız).</li>
+    <li>Çevrimiçi odalara katılmanıza olanak sağlamak için.</li>
+    <li>İstendiğinde müşteri desteği sağlamak için.</li>
+  </ul>
+
+  <h2>3. Üçüncü Taraf Hizmetleri</h2>
+  <p>Uygulamamızı kolaylaştırmak için üçüncü taraf hizmetlerini (kimlik doğrulama ve veritabanı hizmetleri için Firebase gibi) kullanabiliriz. Bu hizmetler, Kişisel Bilgilerinize yalnızca bu görevleri bizim adımıza yerine getirmek için erişebilir ve bunları açıklamamaya veya başka bir amaçla kullanmamaya yükümlüdür.</p>
+
+  <h2>4. Ekran Süresi (Screen Time) ve Derin Odaklanma</h2>
+  <p>"Derin Odaklanma" (Deep Focus) özelliğimiz, dikkatinizi dağıtan uygulamaları engellemenize yardımcı olmak için iOS Ekran Süresi API'lerini kullanır. Cihazınızın dışında hangi uygulamaları kullandığınız veya engellediğiniz hakkında hiçbir bilgiyi iletmiyor, toplamıyor veya saklamıyoruz. Bu veriler tamamen cihazınızda kalır.</p>
+
+  <h2>5. Veri Güvenliği</h2>
+  <p>Bize Kişisel Bilgilerinizi sağlama konusundaki güveninize değer veriyoruz, bu nedenle bunları korumak için ticari olarak kabul edilebilir yöntemler kullanmaya çalışıyoruz. Ancak internet üzerinden hiçbir aktarım yönteminin veya elektronik depolama yönteminin %100 güvenli ve güvenilir olmadığını ve mutlak güvenliğini garanti edemeyeceğimizi unutmayın.</p>
+
+  <h2>6. Bu Gizlilik Politikasındaki Değişiklikler</h2>
+  <p>Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Bu nedenle, herhangi bir değişiklik için bu sayfayı periyodik olarak gözden geçirmeniz tavsiye edilir. Yeni Gizlilik Politikasını bu sayfada yayınlayarak sizi herhangi bir değişiklikten haberdar edeceğiz.</p>
+
+  <h2>7. Bize Ulaşın</h2>
+  <p>Gizlilik Politikamız hakkında herhangi bir sorunuz veya öneriniz varsa, focusedxapp@gmail.com adresinden bizimle iletişime geçmekten çekinmeyin.</p>
+</div>
+
+<footer>
+  <p>© 2026 Focused App. Tüm hakları saklıdır.</p>
+  <div class="footer-links">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="support.html">Destek</a>
+  </div>
+</footer>
+
+</body>
+</html>
