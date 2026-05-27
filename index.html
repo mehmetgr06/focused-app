@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focused — Focus. Grow. Achieve.</title>
+  <meta name="description" content="Focused is your all-in-one productivity app. Pomodoro timer, habit tracking, study rooms, task manager and deep focus mode." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f14;
+      --surface: #1a1a24;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7c6fcd;
+      --accent2: #5ec4e8;
+      --text: #f0f0f5;
+      --muted: rgba(240,240,245,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(15,15,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--accent); }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 14px;
+      font-weight: 500; transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .btn-nav {
+      padding: 9px 20px;
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: 10px;
+      font-weight: 600 !important;
+    }
+    .btn-nav:hover { background: #6a5ebd !important; color: #fff; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(124,111,205,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,111,205,0.15);
+      border: 1px solid rgba(124,111,205,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(44px, 8vw, 88px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 20px; color: var(--muted); max-width: 560px;
+      margin: 0 auto 40px; font-weight: 400; line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--accent), #6a5ebd);
+      color: #fff; text-decoration: none;
+      border-radius: 14px; font-size: 16px; font-weight: 700;
+      box-shadow: 0 8px 32px rgba(124,111,205,0.35);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,111,205,0.45); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 32px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; text-decoration: none;
+      border-radius: 14px; font-size: 16px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* FEATURES */
+    .section { padding: 100px 24px; }
+    .section-label {
+      text-align: center; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 16px;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .section-sub {
+      text-align: center; color: var(--muted); font-size: 18px;
+      max-width: 520px; margin: 0 auto 64px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,111,205,0.25);
+    }
+    .feature-icon {
+      font-size: 36px; margin-bottom: 16px;
+      display: inline-block;
+    }
+    .feature-card h3 {
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 10px; letter-spacing: -0.3px;
+    }
+    .feature-card p { color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: flex; flex-direction: column; gap: 40px;
+      max-width: 680px; margin: 0 auto;
+    }
+    .step {
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .step-num {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #6a5ebd);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800;
+    }
+    .step-body h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .step-body p { color: var(--muted); font-size: 15px; }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-box {
+      max-width: 700px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(124,111,205,0.15), rgba(94,196,232,0.08));
+      border: 1px solid rgba(124,111,205,0.25);
+      border-radius: 28px;
+      padding: 64px 40px;
+    }
+    .cta-box h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .cta-box p { color: var(--muted); font-size: 18px; margin-bottom: 36px; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 16px 28px;
+      background: #fff; color: #111;
+      text-decoration: none;
+      border-radius: 14px; font-size: 15px; font-weight: 700;
+      transition: all 0.2s;
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,255,255,0.15); }
+    .store-btn svg { width: 24px; height: 24px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p { color: var(--muted); font-size: 14px; }
+    footer a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; gap: 24px; }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 16px; }
+      footer { flex-direction: column; text-align: center; }
+      .cta-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Focused<span>.</span></div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="support.html">Support</a>
+    <a href="#download" class="btn-nav">Download</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Available on the App Store</div>
+  <h1>Focus. Grow.<br /><em>Achieve.</em></h1>
+  <p>Your all-in-one productivity companion. Pomodoro sessions, habit tracking, study rooms, and deep focus — all in one beautiful app.</p>
+  <div class="hero-cta">
+    <a href="#download" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on App Store
+    </a>
+    <a href="#features" class="btn-secondary">Explore Features →</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-label">Everything you need</div>
+  <h2 class="section-title">Built for real productivity</h2>
+  <p class="section-sub">Every feature is designed to help you do less distraction and more of what matters.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🍅</div>
+      <h3>Pomodoro Timer</h3>
+      <p>Work in focused 25-minute sessions with scheduled breaks. Customize durations and choose from beautiful nature backgrounds and ambient sounds.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚫</div>
+      <h3>Deep Focus Mode</h3>
+      <p>Block distracting apps during your sessions. Choose social media, games, entertainment — or block everything with one tap. Powered by Screen Time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>Online Study Rooms</h3>
+      <p>Study alongside others in real-time virtual focus rooms. Create public or private rooms, share a timer, and stay accountable together.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔗</div>
+      <h3>Habit Chains</h3>
+      <p>Build lasting habits by never breaking the chain. Visual heatmaps, streak counters, and daily check-ins keep you motivated and consistent.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <h3>Task Manager</h3>
+      <p>Organize your to-dos with priorities and flags. A clean, distraction-free list that helps you stay on top of everything that matters today.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Progress & Growth</h3>
+      <p>Track your focus hours, session counts, and productivity trends. Detailed statistics help you understand and improve your work patterns.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="section-label">Simple by design</div>
+  <h2 class="section-title">How it works</h2>
+  <p class="section-sub">Getting started takes less than a minute. Just focus.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Set your session</h3>
+        <p>Choose your work duration, pick a background, and enable Deep Focus to block distractions. Everything is customizable to your style.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Work deeply</h3>
+        <p>Start your Pomodoro timer and enter deep work mode. Join a study room to focus alongside others or go solo — it's up to you.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Track your habits</h3>
+        <p>After your session, check off your habit chains and update your task list. Watch your streaks grow and consistency compound over time.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Review your progress</h3>
+        <p>Check your weekly stats, celebrate milestones, and plan your next session. Small improvements every day lead to extraordinary results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DOWNLOAD CTA -->
+<section class="cta-section" id="download">
+  <div class="cta-box">
+    <h2>Start your most productive day today.</h2>
+    <p>Focused is free to download on the App Store. Take control of your time and build the habits that last.</p>
+    <a href="https://apps.apple.com" class="store-btn">
+      <svg viewBox="0 0 24 24" fill="black"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the App Store
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Focused App. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+</footer>
+
+</body>
+</html>

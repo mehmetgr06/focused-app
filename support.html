@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Focused App</title>
+  <meta name="description" content="Get help with Focused — the productivity app for iOS. Contact support or browse FAQs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f14;
+      --surface: #1a1a24;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7c6fcd;
+      --text: #f0f0f5;
+      --muted: rgba(240,240,245,0.55);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(15,15,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 20px; font-weight: 800; text-decoration: none; color: var(--text); }
+    .nav-logo span { color: var(--accent); }
+    nav a.back { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
+    nav a.back:hover { color: var(--text); }
+
+    .hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(124,111,205,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,111,205,0.15);
+      border: 1px solid rgba(124,111,205,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800; letter-spacing: -2px; margin-bottom: 16px;
+    }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 480px; margin: 0 auto; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 60px 24px 100px; }
+
+    /* CONTACT */
+    .contact-card {
+      background: linear-gradient(135deg, rgba(124,111,205,0.15), rgba(94,196,232,0.06));
+      border: 1px solid rgba(124,111,205,0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .contact-card .icon { font-size: 48px; margin-bottom: 16px; }
+    .contact-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .contact-card p { color: var(--muted); margin-bottom: 24px; }
+    .email-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #fff; text-decoration: none;
+      border-radius: 12px; font-size: 15px; font-weight: 700;
+      transition: all 0.2s;
+    }
+    .email-btn:hover { background: #6a5ebd; transform: translateY(-1px); }
+
+    /* FAQ */
+    .faq-title {
+      font-size: 28px; font-weight: 800; letter-spacing: -0.8px;
+      margin-bottom: 24px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px;
+      background: none; border: none;
+      color: var(--text); font-size: 16px; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer; text-align: left;
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.03); }
+    .faq-q .arrow { font-size: 18px; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+    .faq-item.open .faq-q .arrow { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      color: var(--muted); font-size: 15px; line-height: 1.7;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    /* INFO CARDS */
+    .info-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-top: 48px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+    }
+    .info-card .icon { font-size: 28px; margin-bottom: 12px; }
+    .info-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .info-card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p { color: var(--muted); font-size: 14px; }
+    footer a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; gap: 24px; }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .contact-card { padding: 28px 20px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Focused<span>.</span></a>
+  <a href="index.html" class="back">← Back to home</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🛟 Support Center</div>
+  <h1>How can we help?</h1>
+  <p>We're here to help you get the most out of Focused. Browse the FAQs or reach out directly.</p>
+</div>
+
+<div class="content">
+
+  <!-- CONTACT -->
+  <div class="contact-card">
+    <div class="icon">✉️</div>
+    <h2>Contact Support</h2>
+    <p>Have a question, found a bug, or have a feature suggestion? Send us an email and we'll get back to you as soon as possible.</p>
+    <a href="mailto:support@focusedapp.io" class="email-btn">
+      📧 support@focusedapp.io
+    </a>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">How does the Pomodoro timer work? <span class="arrow">+</span></button>
+    <div class="faq-a">The Pomodoro technique breaks work into 25-minute focused sessions, followed by a 5-minute break. After 4 sessions, you take a longer break. In Focused, you can fully customize all durations to fit your personal rhythm.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">What is Deep Focus Mode? <span class="arrow">+</span></button>
+    <div class="faq-a">Deep Focus Mode uses iOS Screen Time to block distracting apps during your focus sessions. You can select specific apps, categories (social media, games, entertainment), or block all at once. To use it, you'll need to grant Screen Time permissions.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">How do Study Rooms work? <span class="arrow">+</span></button>
+    <div class="faq-a">Study Rooms are virtual spaces where you and others can focus together in real-time. You can create a public room (anyone can join) or a private room (invite only). A shared timer keeps everyone synchronized. Sign in is required to use this feature.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">What is a Habit Chain? <span class="arrow">+</span></button>
+    <div class="faq-a">A Habit Chain helps you build consistency by checking off a habit every day without "breaking the chain." You can create habits with custom icons and colors, track your streaks, and view a heatmap of your progress over months.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">Do I need to sign in to use the app? <span class="arrow">+</span></button>
+    <div class="faq-a">No! The core features (Pomodoro timer, tasks, habit chains, weekly schedule) work without an account. Sign-in is required for Study Rooms and cloud sync across devices.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">How do I change the app language? <span class="arrow">+</span></button>
+    <div class="faq-a">Focused automatically follows your device language. If your device is set to Turkish, the app will display in Turkish. For English, set your device language to English. You can also manually change the language in the app's Profile → Settings section.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <button class="faq-q">How do I report a bug or request a feature? <span class="arrow">+</span></button>
+    <div class="faq-a">Please email us at support@focusedapp.io with as much detail as possible. For bugs, include your device model and iOS version. We read every message and genuinely appreciate your feedback.</div>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">📱</div>
+      <h3>Compatibility</h3>
+      <p>Focused requires iOS 16 or later. Works on iPhone and iPad. Some features require an internet connection.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🔒</div>
+      <h3>Privacy</h3>
+      <p>We take your privacy seriously. Read our <a href="privacy.html" style="color: var(--accent);">Privacy Policy</a> to learn how your data is handled.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">⏱️</div>
+      <h3>Response Time</h3>
+      <p>We typically respond to support emails within 24–48 hours on business days.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🌍</div>
+      <h3>Languages</h3>
+      <p>Focused is fully available in English and Turkish, with more languages planned for future updates.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Focused App. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
